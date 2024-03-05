@@ -1,42 +1,49 @@
 const axios = require('axios');
 
-let baseUrl = process.env.API_URL;
+const baseUrl = process.env.API_URL;
+const STATUS_MAPPER = {
+  'new': 'Nuevo',
+  'used': 'Usado',
+  'not_specified': 'No especificado',
+}
 
-const findProducts = async(req, res) => {
+const findProducts = async({ search }) => {
     try {
-      const query = req.query.search;
-
-      const products = await getProducts(query);
+      const products = await getProducts(search);
 
       let response = {
+        categories: [],
         items: []
       };
 
+      //Get the category list of all products based on first one, because all the products in the request belongs to the same category
+      response.categories = await getProductCategory(products[0].category_id);
+
       products.map((product) => {
-        response.items = [ ...response.items, parseProduct(product, {}) ]
-      })
-      
-      res.status(200).json({ data: response });
+        response.items = [ ...response.items, parseProduct(product) ];
+      });
+
+      return response;
     } catch (err) {
-        res.status(500).json({ error: 'Error trying to get elements.' });
+        return {error: err.message}
     }
 }
 
-const findProduct = async(req, res) => {
+const findProduct = async({ id }) => {
     try {
-      const id = req.params.id;
 
       const productData = await getProductData(id);
-      const productPathFromRoot = await getProductCategory(productData.category_id);
       const productDescription = await getProductDescription(id);
 
       const response = {
-        item: parseProduct(productData, productDescription)
+        items: parseProduct(productData),
       };
+    
+      response.items.description = productDescription.plain_text;
 
-      res.status(200).json({ response });
+      return response;
     } catch(err) {
-      res.status(500).json({ err });
+      return {error: err.message}
     }
 }
 
@@ -59,23 +66,23 @@ const getProductDescription = async(id) => {
 
 const getProductCategory = async(categoryID) => {
     const { data } = await axios.get(`${baseUrl}/categories/${categoryID}`);
-    return data.path_from_root;
+    return data.path_from_root.map(categoryItem => {
+      return categoryItem.name;
+    });
 }
 
-const parseProduct = (product, productDescription) => {
+const parseProduct = (product) => {
     return {
         id: product.id,
         title: product.title,
         price: {
             currency: product.currency_id,
             amount: product.price,
-            decimals: product.original_price
+            decimals: 0
         },
         picture: product.pictures ? product.pictures[0].url : product.thumbnail,
-        condition: product.condition,
-        free_shipping: product.free_shipping,
-        sold_quantity: product.sold_quantity,
-        description: productDescription.plain_text
+        condition: STATUS_MAPPER[product.condition],
+        free_shipping: product.shipping.free_shipping
     }
 }
 
