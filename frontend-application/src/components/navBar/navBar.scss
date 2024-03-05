@@ -1,0 +1,16 @@
+@import '../../assets/scss/vars.scss';
+
+.navBar-container {
+    background: $yellow;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 10% 8px 10%;
+}
+
+.logo {
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+}

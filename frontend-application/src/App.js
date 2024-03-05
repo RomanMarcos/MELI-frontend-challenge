@@ -1,14 +1,15 @@
 import './App.scss';
 
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Search } from './views/search/Search';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        
-      </header>
-    </div>
+    <main>
+      <BrowserRouter>
+        <Search />
+      </BrowserRouter>
+    </main>
   );
 }
 
