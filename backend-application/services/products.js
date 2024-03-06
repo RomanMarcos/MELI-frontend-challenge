@@ -50,7 +50,7 @@ const findProduct = async({ id }) => {
 }
 
 const getProducts = async(query) => {
-    const {data} = await axios.get(`${baseUrl}/sites/MLA/search`, {
+    const {data} = await axios.get(`${baseUrl}/sites/MLA/search?`, {
         params: { q: query },
     });
     return data.results.slice(0, 4);

@@ -9,6 +9,7 @@ import { ProductsDisplay } from '../../components/productsDisplay/ProductsDispla
 export const Results = () => {
 
     const [results, setResults] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [isLoad, setIsLoad] = useState(false);
     const { search } = useLocation();
     const query = queryString.parse(search);
@@ -16,6 +17,7 @@ export const Results = () => {
     useEffect(() => {
         getProducts(query.search).then(({ data }) => {
             setResults(data.apiResponse.payload.item);
+            setCategories(data.apiResponse.payload.categories);
             setIsLoad(true);
         });
     }, [query.search])
@@ -24,7 +26,7 @@ export const Results = () => {
     <>
       <section>
         {isLoad ? (
-          <ProductsDisplay results={results} isLoad={isLoad} />
+          <ProductsDisplay results={results} categories={categories} />
         ) : (
           <Loader />
         )}

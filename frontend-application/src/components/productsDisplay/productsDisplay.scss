@@ -61,6 +61,11 @@
           }
         }
 
+        .free-shipping-icon {
+          margin-left: 9.6px;
+          margin-bottom: 4px;
+        }
+
         .address {
           width: auto;
           color: $gray-666;
@@ -82,4 +87,117 @@
         }
       }
     }
+}
+
+@media (min-width: 1100px) {
+  .product-item {
+    .item-details {
+      .top-section {
+        .address {
+          width: 20%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .product-item {
+    .item-details {
+      .top-section {
+        .address {
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .product-item {
+    .image-container {
+      .product-image {
+        width: 180px;
+        height: 180px;
+      }
+    }
+
+    .item-details {
+      margin-right: auto;
+      width: calc(100% - 196px);
+      padding-bottom: 16px;
+
+      .top-section {
+        display: flex;
+        align-items: flex-end;
+        justify-content: unset;
+        flex-direction: row;
+        margin-bottom: 32px;
+        margin-top: 16px;
+      }
+
+      .item-title {
+        font-size: 18px;
+        max-width: 40%;
+      }
+    }
+  }
+}
+
+@media (min-width: 400px) and (max-width: 767px) {
+  .product-item {
+    .image-container {
+      .product-image {
+        width: 135px;
+        height: 135px;
+        margin-right: 16px;
+        padding-bottom: 16px;
+        border-radius: 4px;
+        object-fit: contain;
+        cursor: pointer;
+      }
+    }
+
+    .item-details {
+      width: calc(100% - 151px);
+      .item-title {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (min-width: 400px) {
+  .product-item {
+    flex-direction: row;
+    
+    .image-container {
+      justify-content: flex-start;
+      width: max-content;
+
+      .product-image {
+        margin-right: 16px;
+      }
+    }
+
+    .item-details {
+      margin-right: auto;
+      color: $gray-333;
+      padding-bottom: 16px;
+
+      .top-section {
+        .item-price-block {
+          .item-price {
+            font-size: 24px;
+            line-height: 27px;
+          }
+
+          .decimals {
+            font-size: 14px;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+  }
 }
