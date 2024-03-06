@@ -10,7 +10,7 @@ router.route('/').get(async(req, res) => {
     const response = await Products.findProducts(req.query);
     if(response.error){ 
         apiResponse.setError(response.error);
-        res.status(400).json({ apiResponse });
+        res.json({ apiResponse });
     } else {
         apiResponse.setProducts(response);
         res.status(200).json({ apiResponse });
@@ -24,7 +24,7 @@ router.route('/:id').get(async(req, res) => {
     const response = await Products.findProduct(req.params);
     if(response.error){
         apiResponse.setError(response.error);
-        res.status(400).json({ apiResponse });
+        res.json({ apiResponse });
     } else {
         apiResponse.setProducts(response);
         res.status(200).json({ apiResponse });

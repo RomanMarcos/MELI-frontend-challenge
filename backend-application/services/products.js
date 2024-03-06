@@ -11,6 +11,8 @@ const findProducts = async({ search }) => {
     try {
       const products = await getProducts(search);
 
+      if (products.length == 0) throw new Error("No products found");
+
       let response = {
         categories: [],
         items: []
