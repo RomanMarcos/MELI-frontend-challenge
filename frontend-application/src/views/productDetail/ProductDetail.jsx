@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from '../../components/loader/Loader';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getProductDetail } from '../../apiCalls/products';
+import { ProductDetailComponent } from '../../components/productDetailComponent/ProductDetailComponent';
 
 export const ProductDetail = () => {
 
-    let [product, setProduct] = useState({
-        item: {}
-    });
+    let [product, setProduct] = useState({});
     const [isLoad, setIsLoad] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
@@ -18,19 +17,17 @@ export const ProductDetail = () => {
             if (data.apiResponse.payload.error) {
                 navigate('/'); //No product found with that specific ID
             } else {
-                setProduct((p) => {
-                    p.item = data.apiResponse.payload.item;
-                });
+                setProduct(data.apiResponse.payload.item);
                 setIsLoad(true);
             }
         });
-    }, [id]);
+    }, [id, navigate]);
 
   return (
     <>
     <section>
         {isLoad ? (
-            <ProductDetail product={product} />
+            <ProductDetailComponent product={product} />
         ) : (
             <Loader />
         )}
