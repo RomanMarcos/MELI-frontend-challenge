@@ -10,3 +10,7 @@ export function getProducts(query) {
        }
     );
 }
+
+export function getProductDetail(id) {
+    return axios.get(`${env.url}/items/${id}`);
+}

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import queryString from "query-string";
 
 import { getProducts } from "../../apiCalls/products";
