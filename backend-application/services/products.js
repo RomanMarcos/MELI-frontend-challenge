@@ -38,10 +38,12 @@ const findProduct = async({ id }) => {
       const productDescription = await getProductDescription(id);
 
       const response = {
+        categories: [],
         items: parseProduct(productData),
       };
     
       response.items.description = productDescription.plain_text;
+      response.categories = await getProductCategory(productData.category_id);
 
       return response;
     } catch(err) {

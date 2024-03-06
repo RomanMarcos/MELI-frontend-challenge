@@ -6,7 +6,8 @@ import { ProductDetailComponent } from '../../components/productDetailComponent/
 
 export const ProductDetail = () => {
 
-    let [product, setProduct] = useState({});
+    const [product, setProduct] = useState({});
+    const [categories, setCategories] = useState([]);
     const [isLoad, setIsLoad] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
@@ -18,6 +19,7 @@ export const ProductDetail = () => {
                 navigate('/'); //No product found with that specific ID
             } else {
                 setProduct(data.apiResponse.payload.item);
+                setCategories(data.apiResponse.payload.categories);
                 setIsLoad(true);
             }
         });
@@ -27,7 +29,7 @@ export const ProductDetail = () => {
     <>
     <section>
         {isLoad ? (
-            <ProductDetailComponent product={product} />
+            <ProductDetailComponent product={product} categories={categories} />
         ) : (
             <Loader />
         )}
