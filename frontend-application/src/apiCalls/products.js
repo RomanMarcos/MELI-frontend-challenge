@@ -5,7 +5,7 @@ export function getProducts(query) {
     return axios.get(`${env.url}/items/`, 
         {
             params: {
-               q: query
+               search: query
            }
        }
     );

@@ -11,6 +11,8 @@ const findProducts = async({ search }) => {
     try {
       const products = await getProducts(search);
 
+      if (products.length == 0) throw new Error("No products found");
+
       let response = {
         categories: [],
         items: []
@@ -48,7 +50,7 @@ const findProduct = async({ id }) => {
 }
 
 const getProducts = async(query) => {
-    const {data} = await axios.get(`${baseUrl}/sites/MLA/search`, {
+    const {data} = await axios.get(`${baseUrl}/sites/MLA/search?`, {
         params: { q: query },
     });
     return data.results.slice(0, 4);
