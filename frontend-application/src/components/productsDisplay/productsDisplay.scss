@@ -27,7 +27,7 @@
       .product-image {
         width: 180px;
         height: 180px;
-        padding-bottom: 16px;
+        margin: 16px;
         border-radius: 4px;
         object-fit: contain;
         cursor: pointer;
@@ -53,8 +53,8 @@
           align-items: flex-end;
 
           .item-price {
-            font-size: 20px;
-            line-height: 23px;
+            font-size: 24px;
+            line-height: 17px;
             color: $gray-333;
             display: flex;
             align-items: flex-start;
@@ -144,14 +144,27 @@
   }
 }
 
-@media (min-width: 400px) and (max-width: 767px) {
+@media (max-width: 610px){
+  .product-item {
+    .item-details {
+      .top-section {
+        .address {
+          display: none;
+        }
+        .free-shipping-icon {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) and (max-width: 767px) {
   .product-item {
     .image-container {
       .product-image {
         width: 135px;
         height: 135px;
-        margin-right: 16px;
-        padding-bottom: 16px;
         border-radius: 4px;
         object-fit: contain;
         cursor: pointer;
@@ -163,41 +176,44 @@
       .item-title {
         font-size: 16px;
       }
-    }
-  }
-}
-
-@media (min-width: 400px) {
-  .product-item {
-    flex-direction: row;
-    
-    .image-container {
-      justify-content: flex-start;
-      width: max-content;
-
-      .product-image {
-        margin-right: 16px;
-      }
-    }
-
-    .item-details {
-      margin-right: auto;
-      color: $gray-333;
-      padding-bottom: 16px;
-
       .top-section {
         .item-price-block {
           .item-price {
-            font-size: 24px;
-            line-height: 27px;
-          }
-
-          .decimals {
-            font-size: 14px;
-            line-height: 20px;
+            font-size: 18px;
           }
         }
       }
     }
+  }
+}
+
+@media (max-width: 499px) {
+  .product-item {
+    .image-container {
+      .product-image {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    .item-details {
+      width: 100%;
+      .item-title {
+        font-size: 16px;
+      }
+      .top-section {
+        .item-price-block {
+          .item-price {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .product-item {
+    grid-template-columns: auto;
   }
 }

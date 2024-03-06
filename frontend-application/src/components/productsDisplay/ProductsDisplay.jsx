@@ -4,15 +4,15 @@ import { Breadcrumb } from '../breadcrumb/Breadcrumb';
 import { Link } from 'react-router-dom';
 import { formatter } from '../../helper/priceFormatter';
 import freeShipping from '../../assets/ic_shipping.png';
+import { ProductNotFound } from '../productNotFound/ProductNotFound';
 
 //This component is the responsibe of show the list of products after the API response
 export const ProductsDisplay = ({ results, categories }) => {
   return (
         <section>
           <Breadcrumb categories={categories} />
-
           <div className="products-list">
-          {results.length > 0 ? results.map((item) => {
+          {results && results.length > 0 ? results.map((item) => {
             return (
                 <Link to={`/items/${item.id}`} className='product-item' key={item.id}>
                     <div className="image-container">
@@ -42,7 +42,7 @@ export const ProductsDisplay = ({ results, categories }) => {
                     </div>
                 </Link>
             );
-          }) : <p>NO RESULTS</p> }
+          }) : <ProductNotFound /> }
       </div> 
       </section>
     )
