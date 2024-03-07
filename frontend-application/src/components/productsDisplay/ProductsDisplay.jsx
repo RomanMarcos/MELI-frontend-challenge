@@ -43,7 +43,11 @@ export const ProductsDisplay = ({ results, categories }) => {
                     </div>
                 </Link>
             );
-          }) : <ProductNotFound /> }
+          }) : 
+              <div data-testid='product-not-found'>
+              <ProductNotFound /> 
+              </div>
+            }
       </div> 
       </section>
     )
