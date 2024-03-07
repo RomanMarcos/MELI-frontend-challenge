@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import "./productsDisplay.scss";
 import { Breadcrumb } from '../breadcrumb/Breadcrumb';
 import { Link } from 'react-router-dom';
@@ -46,4 +47,9 @@ export const ProductsDisplay = ({ results, categories }) => {
       </div> 
       </section>
     )
+}
+
+ProductsDisplay.propTypes = {
+  results: PropTypes.array,
+  categories: PropTypes.array
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import './productDetailComponent.scss';
 import { formatter } from '../../helper/priceFormatter';
 import { Breadcrumb } from '../breadcrumb/Breadcrumb'
@@ -43,4 +44,9 @@ export const ProductDetailComponent = ({ product, categories }) => {
       </div>
     </section>
   )
+}
+
+ProductDetailComponent.propTypes = {
+  results: PropTypes.object,
+  categories: PropTypes.array
 }

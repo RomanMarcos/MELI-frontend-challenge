@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import './breadcrumb.scss';
 
 export const Breadcrumb = ({ categories }) => {
@@ -9,4 +10,8 @@ export const Breadcrumb = ({ categories }) => {
         </div>
     </div>
   )
+}
+
+Breadcrumb.propTypes = {
+  categories: PropTypes.array
 }

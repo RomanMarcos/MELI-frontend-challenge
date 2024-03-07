@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import queryString from "query-string";
 
@@ -15,12 +15,13 @@ export const Results = () => {
     const query = queryString.parse(search);
 
     useEffect(() => {
+        setIsLoad(false);
         getProducts(query.search).then(({ data }) => {
             setResults(data.apiResponse.payload.item);
             setCategories(data.apiResponse.payload.categories);
             setIsLoad(true);
         });
-    }, [query.search])
+    }, [query.search]);
 
   return (
     <>

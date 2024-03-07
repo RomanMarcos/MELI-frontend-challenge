@@ -12,7 +12,6 @@ export const ProductDetail = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    //Need to check this hook initialization because it's give me an infinite loop trying to use it..
     useEffect(() => {
        getProductDetail(id).then(({ data }) => {
             if (data.apiResponse.payload.error) {
