@@ -2,6 +2,7 @@ import React from 'react'
 import './productDetailComponent.scss';
 import { formatter } from '../../helper/priceFormatter';
 import { Breadcrumb } from '../breadcrumb/Breadcrumb'
+import { random_soldQuantity } from '../../helper/randomNumber';
 
 export const ProductDetailComponent = ({ product, categories }) => {
   return (
@@ -13,7 +14,7 @@ export const ProductDetailComponent = ({ product, categories }) => {
               <img className="image-container" alt={product.title} src={product.picture}></img>
               <div className="product-detail-actions">
                 <div className="product-condition">
-                  {product.condition} - {product.sold_quantity} vendidos
+                  {product.condition} - {random_soldQuantity(5, 100)} vendidos
                 </div>
                 <h1 className="product-title">{product.title}</h1>
                 <span className="item-price">
