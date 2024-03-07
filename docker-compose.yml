@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  backend-application:
+    image: node:20.9.0
+    container_name: api-mercadoLibre 
+    working_dir: /usr/app
+    volumes:
+      - ./backend-application:/usr/app
+    ports:
+      - 3001:3001
+    env_file: ./backend-application/.env
+    command: bash -c "npm install && npm start"
+  
+  frontend-application:
+    image: node:20.9.0
+    container_name: frontend-mercadoLibre
+    working_dir: /usr/src/app
+    volumes:
+      - ./frontend-application:/usr/src/app
+    ports:
+      - 3000:3000
+    command: bash -c "npm install && npm start"
