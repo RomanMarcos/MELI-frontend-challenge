@@ -22,11 +22,16 @@ const findProducts = async({ search }) => {
         response.categories = [...response.categories, category.name]
       })
 
-      products.data.map((product) => {
-        response.items = [ ...response.items, parseProduct(product) ];
-      });
+      /* The objetive of the promise is to resolve the situation with each product seller address information, because the map() function returns a promise,
+        then in order to handle it it's necessary to use the Promise
+      */
+      const [promiseToReturn] = await Promise.all( products.data.map(async(product) => {
+         const productData =  await getProductData(product.id);
+          response.items = [ ...response.items, parseProduct(product, productData.seller_address.state) ];
+          return response;
+      }) );
 
-      return response;
+      return promiseToReturn;
     } catch (err) {
         return {error: err.message}
     }
@@ -41,7 +46,7 @@ const findProduct = async({ id }) => {
 
       const response = {
         categories: [],
-        items: parseProduct(productData),
+        items: parseProduct(productData, productData.seller_address.state),
       };
     
       response.items.description = productDescription.plain_text;
@@ -96,7 +101,7 @@ const parseProduct = (product, sellerState) => {
         picture: product.pictures ? product.pictures[0].url : product.thumbnail,
         condition: STATUS_MAPPER[product.condition],
         free_shipping: product.shipping.free_shipping,
-        address: sellerState
+        seller_address: sellerState.name
     }
 }
 

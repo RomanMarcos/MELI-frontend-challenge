@@ -12,11 +12,11 @@ export const ProductsDisplay = ({ results, categories }) => {
         <section>
           <Breadcrumb categories={categories} />
           <div className="products-list">
-          {results && results.length > 0 ? results.map((item) => {
+          {results && results.length > 0 ? results.map((product) => {
             return (
-                <Link to={`/items/${item.id}`} className='product-item' key={item.id}>
+                <Link to={`/items/${product.id}`} className='product-item' key={product.id}>
                     <div className="image-container">
-                        <img className="product-image" alt={item.title} src={item.picture} />
+                        <img className="product-image" alt={product.title} src={product.picture} />
                     </div>
                     <div className="item-details">
                         <div className="top-section">
@@ -24,11 +24,11 @@ export const ProductsDisplay = ({ results, categories }) => {
                         <div className="item-price">
                             <span className="price">
                             {
-                              "$ " + formatter(item.price.amount, item.price.currency)
+                              "$ " + formatter(product.price.amount, product.price.currency)
                             }
                             </span>
                         </div>
-                        {item.free_shipping && (
+                        {product.free_shipping && (
                           <img
                             className="free-shipping-icon"
                             alt="Envío gratis"
@@ -36,9 +36,9 @@ export const ProductsDisplay = ({ results, categories }) => {
                           />
                         )}
                         </div>
-                        <div className="address">{'Capital Federal'}</div> {/* Need to fix the way I get the address info from the MELI API */}
+                        <div className="address">{product.seller_address}</div> {/* Need to fix the way I get the address info from the MELI API */}
                     </div>
-                    <div className="item-title">{item.title}</div>
+                    <div className="item-title">{product.title}</div>
                     </div>
                 </Link>
             );
