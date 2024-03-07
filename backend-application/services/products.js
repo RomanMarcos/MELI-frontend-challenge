@@ -18,10 +18,11 @@ const findProducts = async({ search }) => {
         items: []
       };
 
-      //Get the category list of all products based on first one, because all the products in the request belongs to the same category
-      response.categories = await getProductCategory(products[0].category_id);
+      products.categories.map((category) => {
+        response.categories = [...response.categories, category.name]
+      })
 
-      products.map((product) => {
+      products.data.map((product) => {
         response.items = [ ...response.items, parseProduct(product) ];
       });
 
@@ -35,6 +36,7 @@ const findProduct = async({ id }) => {
     try {
 
       const productData = await getProductData(id);
+
       const productDescription = await getProductDescription(id);
 
       const response = {
@@ -55,7 +57,14 @@ const getProducts = async(query) => {
     const {data} = await axios.get(`${baseUrl}/sites/MLA/search?`, {
         params: { q: query },
     });
-    return data.results.slice(0, 4);
+    
+    const resultCategory = data.filters.find((filter) => filter.name === 'Categorías');
+    const filterCategory = resultCategory ? resultCategory.values[0].path_from_root : [];
+
+    return {
+      data: data.results.slice(0, 4),
+      categories: filterCategory
+    }
 }
 
 const getProductData = async(id) => {
@@ -75,7 +84,7 @@ const getProductCategory = async(categoryID) => {
     });
 }
 
-const parseProduct = (product) => {
+const parseProduct = (product, sellerState) => {
     return {
         id: product.id,
         title: product.title,
@@ -86,7 +95,8 @@ const parseProduct = (product) => {
         },
         picture: product.pictures ? product.pictures[0].url : product.thumbnail,
         condition: STATUS_MAPPER[product.condition],
-        free_shipping: product.shipping.free_shipping
+        free_shipping: product.shipping.free_shipping,
+        address: sellerState
     }
 }
 
