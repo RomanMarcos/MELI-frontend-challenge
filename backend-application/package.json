@@ -10,10 +10,16 @@
   "author": "marcosroman322@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
     "nodemon": "^3.1.0",
+    "promise": "^8.3.0",
     "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
   }
 }

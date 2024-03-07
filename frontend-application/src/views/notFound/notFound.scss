@@ -1,0 +1,46 @@
+@import '../../assets/scss/vars.scss';
+
+.notFound-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.notFound-container-img {
+    display: flex;
+    justify-content: center;
+}
+
+.notFound-container-text {
+    display: flex;
+    justify-content: center;
+}
+
+.notFound-text{
+    color: $gray-333;
+    font-size: 20px;
+}
+
+.notFound-container-link {
+    display: flex;
+    justify-content: center;
+}
+
+.notFound-link{
+    text-decoration: none;
+    color: $gray-333;
+    font-size: 1rem;
+    width: auto;
+}
+
+@media (max-width: 650px) {
+    .notFound-text{
+        font-size: 15px;
+    }
+    .notFound-link{
+        font-size: .75rem;
+    }
+}

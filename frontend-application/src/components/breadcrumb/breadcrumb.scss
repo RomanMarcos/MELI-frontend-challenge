@@ -1,0 +1,18 @@
+@import '../../assets/scss/vars.scss';
+
+.breadcrumbs-container {
+    display: grid;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+.breadcrumbs-items {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 16px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    color: $gray-999;
+}
