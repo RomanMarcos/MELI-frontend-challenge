@@ -18,7 +18,6 @@ const findProducts = async({ search }) => {
         items: []
       };
 
-
       products.categories.map((category) => {
         response.categories = [...response.categories, category.name]
       });
@@ -37,7 +36,6 @@ const findProducts = async({ search }) => {
       }) );
 
       Instead of this promese, the code below return the necessary data
-
       */
 
       products.data.map((product) => {

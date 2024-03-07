@@ -4,9 +4,7 @@ import { env } from '../env/env.js';
 export function getProducts(query) {
     return axios.get(`${env.url}/items/`, 
         {
-            params: {
-               search: query
-           }
+          params: { search: query }
        }
     );
 }
