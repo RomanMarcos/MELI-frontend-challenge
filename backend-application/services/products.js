@@ -18,20 +18,33 @@ const findProducts = async({ search }) => {
         items: []
       };
 
+
       products.categories.map((category) => {
         response.categories = [...response.categories, category.name]
-      })
+      });
 
-      /* The objetive of the promise is to resolve the situation with each product seller address information, because the map() function returns a promise,
-        then in order to handle it it's necessary to use the Promise
-      */
+      /* 
+      The objetive of the promise is to resolve the situation with each product seller address information, because the map() function returns a promise,
+      then in order to handle it it's necessary to use the Promise.
+
+      The reason why its commented is because is not efficient to request to each product of the result list EVERY time the some product is searched, 
+      and the endpoint https://api.mercadolibre.com/items/${PRODUCT_ID} is the only one I found that retrieve this info.
+      
       const [promiseToReturn] = await Promise.all( products.data.map(async(product) => {
          const productData =  await getProductData(product.id);
           response.items = [ ...response.items, parseProduct(product, productData.seller_address.state) ];
           return response;
       }) );
 
-      return promiseToReturn;
+      Instead of this promese, the code below return the necessary data
+
+      */
+
+      products.data.map((product) => {
+        response.items = [ ...response.items, parseProduct(product) ];
+      });
+
+      return response;
     } catch (err) {
         return {error: err.message}
     }
@@ -41,12 +54,11 @@ const findProduct = async({ id }) => {
     try {
 
       const productData = await getProductData(id);
-
       const productDescription = await getProductDescription(id);
 
       const response = {
         categories: [],
-        items: parseProduct(productData, productData.seller_address.state),
+        items: parseProduct(productData),
       };
     
       response.items.description = productDescription.plain_text;
@@ -89,7 +101,7 @@ const getProductCategory = async(categoryID) => {
     });
 }
 
-const parseProduct = (product, sellerState) => {
+const parseProduct = (product) => {
     return {
         id: product.id,
         title: product.title,
@@ -101,7 +113,7 @@ const parseProduct = (product, sellerState) => {
         picture: product.pictures ? product.pictures[0].url : product.thumbnail,
         condition: STATUS_MAPPER[product.condition],
         free_shipping: product.shipping.free_shipping,
-        seller_address: sellerState.name
+        seller_address: 'Capital Federal'
     }
 }
 
