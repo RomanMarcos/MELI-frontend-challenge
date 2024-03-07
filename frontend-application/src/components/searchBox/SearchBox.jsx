@@ -21,6 +21,7 @@ export const SearchBox = ({ keyword, setKeyword, search, placeholder }) => {
   return (
     <div className='searchBox-container'>
         <input 
+          data-testid='searchBox-input'
           onChange={setKeyword} 
           onKeyDown={(e) => handleEvent(e)}  
           className='searchBox-input'
