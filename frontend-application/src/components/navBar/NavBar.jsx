@@ -7,10 +7,15 @@ import logo from '../../assets/Logo_ML.png'
 import { SearchBox } from '../searchBox/SearchBox'
 
 export const NavBar = ({ keyword, setKeyword, search }) => {
+
+  const handleKeyword = () => {
+    setKeyword('');
+  }
+
   return (
     <>
         <div className='navBar-container'>
-            <Link to='/'> <img src={logo} alt='Logo mercado libre' className='logo' /></Link>
+            <Link to='/' onClick={handleKeyword} > <img src={logo} alt='Logo mercado libre' className='logo' /></Link>
             <SearchBox keyword={keyword} setKeyword={setKeyword} search={search} placeholder={"Nunca dejes de buscar"} />
         </div>
     </>

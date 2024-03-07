@@ -97,12 +97,15 @@
     }
   }
 
-  @media (max-width: 980px){
+  @media (max-width: 990px){
     .product-detail-top {
       .image-container {
         width: 450px;
         height: 450px;
       }
+    }
+    .product-detail-page .product-detail-top .product-detail-actions .item-price {
+      font-size: 40px;
     }
   }
 
@@ -155,5 +158,4 @@
       font-size: 20px;
     }
   }
-
 }
